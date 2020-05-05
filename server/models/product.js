@@ -33,6 +33,10 @@ const productSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
+    comments: {
+        type: Array,
+        default: []
+    }
     //know when products are created 
 }, { timestamps: true })
 

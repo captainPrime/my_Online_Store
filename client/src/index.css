@@ -51,10 +51,25 @@ td, th{
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+  border-collapse: collapse;
  
 }
 
 tr:nth-child(even){
   background-color: #dddddd;
   font-weight: bold
+}
+
+.comment-action {
+  padding-left: 8px;
+  cursor: 'auto';
+}
+
+[class*='-col-rtl'] .comment-action {
+  padding-right: 8px;
+  padding-left: 0;
+}
+
+.hide{
+  display: none;
 }

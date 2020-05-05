@@ -57,6 +57,35 @@ router.post("/uploadProduct", auth, (req, res, next) => {
     })
 });
 
+router.post("/comment", auth, (req, res) => {
+    const myComment = req.body.comment
+    const productId = req.body.prodId
+    const user = req.user.name
+
+    Products.findOne({ _id: productId }, (err, ProductInfo) => {
+        console.log(ProductInfo)
+        if (myComment.length > 0) {
+            Products.findOneAndUpdate(
+                { _id: productId },
+                {
+                    $push: {
+                        comments: {
+                            user: user,
+                            comment: myComment,
+                            date: Date.now()
+                        }
+                    }
+                },
+                { new: true },
+                (err, ProductInfo) => {
+                    if (err) return res.json({ success: false, err })
+                    res.status(200).json(ProductInfo.comment)
+                }
+            )
+        }
+    })
+});
+
 router.post('/getProduct', (req, res) => {
     //conditions
     const order = req.body.order ? req.body.order : 'desc'

@@ -89,4 +89,55 @@ router.post('/getProfile', auth, (req, res) => {
 
 })
 
+router.post('/addToCart', auth, (req, res) => {
+    //first of all find the user
+    User.findOne({ _id: req.user._id }, (err, userInfo) => {
+        // this is to know if a product already exist
+        let duplicate = false;
+        //console.log(userInfo.email)
+
+        userInfo.cart.forEach((item) => {
+            if (item.id === req.query.productId) {
+                duplicate = true
+            }
+        });
+        //---------------------------------------------------------------------------------
+        if (duplicate) {
+            //these are mongodb syntax
+            User.findOneAndUpdate(
+                { _id: req.user._id, "cart.id": req.query.productId },
+                { $inc: { "cart.$.quantity": 1 } },
+                //this updates the database
+                { new: true },
+
+                () => {
+                    if (err) return res.json({ success: false, err })
+                    res.status(200).json(userInfo.cart)
+                }
+            )
+        }
+        //------------------------------------------------------------------------------------
+        else {
+            User.findOneAndUpdate(
+                { _id: req.user._id },
+                //push a cart attribute and give it a quantity of 1
+                {
+                    $push: {
+                        cart: {
+                            id: req.query.productId,
+                            quantity: 1,
+                            date: Date.now()
+                        }
+                    }
+                },
+                { new: true },
+                (err, userInfo) => {
+                    if (err) return res.json({ success: false, err })
+                    res.status(200).json(userInfo.cart)
+                }
+            )
+        }
+    })
+})
+
 module.exports = router;

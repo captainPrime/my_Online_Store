@@ -3,9 +3,13 @@ import Axios from 'axios'
 import { Row, Col } from 'antd'
 import ProductImage from './sections/productImage'
 import ProductInfo from './sections/productInfo'
-import {addToCart} from '../../../_actions/user_actions'
+import { addToCart } from '../../../_actions/user_actions'
+import { useDispatch } from 'react-redux'
+import CommentPage from './sections/comments'
 
 function SingleProduct(props) {
+
+    const dispatch = useDispatch()
 
     //getting the productId from the link
     const productId = props.match.params.productId
@@ -18,14 +22,22 @@ function SingleProduct(props) {
 
             })
     })
+
+
+
     //console.log(Product)
 
     //-----------------------------------------------------------------------------------------------------
-    const addToCartHandler =(productId) =>{
+    const addToCartHandler = (productId) => {
+        dispatch(addToCart(productId))
+    }
 
+    const handleComment = (comment, prodId) => {
+        let variable = { comment, prodId }
+        Axios.post(`/api/product/comment`, variable)
     }
     return (
-        <div classname="postPage" style={{ width: '100%', padding: '3em 4rem' }}>
+        <div className="postPage" style={{ width: '100%', padding: '3em 4rem' }}>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <h1>{Product.title}</h1>
             </div>
@@ -43,6 +55,12 @@ function SingleProduct(props) {
                     />
                 </Col>
             </Row>
+
+            <CommentPage
+                addComment={(comment, prodId) => handleComment(comment, prodId)}
+                detail={Product}
+
+            />
         </div>
     )
 }

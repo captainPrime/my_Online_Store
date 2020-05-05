@@ -4,7 +4,7 @@ import { Button, Descriptions } from 'antd'
 function ProductInfo(props) {
 
     const [Product, setProduct] = useState([])
-    const [Cart, setCart] = useState([])
+
 
     useEffect(() => {
         setProduct(props.detail)
@@ -31,7 +31,7 @@ function ProductInfo(props) {
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Button size="large" shape="round" type="primary" 
-                onclick={addToCartHandler}
+                onClick={addToCartHandler}
                 >
                     Add to Cart
                 </Button>
