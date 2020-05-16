@@ -51,7 +51,7 @@ function UploadProduct(props) {
         event.preventDefault()
 
         if (!titleValue || !descriptionValue || !priceValue || !Images) {
-            alert("please fill up all field")
+            message.error("please fill up all field")
         }
         else {
             // these are the request body
@@ -71,11 +71,11 @@ function UploadProduct(props) {
                 .then(response => {
                     if (response.data.success) {
                         console.log(response.data)
-                        alert('Product successfully uploaded');
+                        message.success('Product successfully uploaded');
                         props.history.push('/');
                     }
                     else {
-                        alert('Failed to Save Product')
+                        message.error('Failed to Save Product')
                     }
                 })
         }

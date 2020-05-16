@@ -1,16 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
-import { Menu, Icon, Badge } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Menu, Icon, Badge, Avatar } from 'antd';
 import axios from 'axios';
 import { USER_SERVER } from '../../../Config';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import Axios from 'axios'
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 function RightMenu(props) {
   const user = useSelector(state => state.user)
+
+  const [ProfilePicture, setProfilePicture] = useState()
+  const [CartBadge, setCartBadge] = useState(0)
 
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then(response => {
@@ -21,6 +25,27 @@ function RightMenu(props) {
       }
     });
   };
+
+
+  useEffect(() => {
+    Axios.get('/api/users/getProfilePicture')
+      .then(response => {
+        if (response.data.success) {
+          setProfilePicture(response.data.profilepicture)
+        }
+
+      })
+  })
+
+  useEffect(() => {
+    Axios.get('/api/users/userCartInfo')
+      .then(response => {
+        if (response.data.success) {
+          setCartBadge(response.data.cart.length)
+        }
+
+      })
+  })
 
   if (user.userData && !user.userData.isAuth) {
     return (
@@ -64,21 +89,37 @@ function RightMenu(props) {
           </MenuItemGroup>
         </SubMenu>
 
-        <Menu.Item key="profile">
-          <a href="/profile">My Account</a>
-        </Menu.Item>
 
         <Menu.Item key="cart" >
-          <Badge count={1} style={{ marginTop: '10px' }}>
+          <Badge count={CartBadge} style={{ marginTop: '10px' }}>
             <a href="/user/cart" style={{ marginRigth: -22, color: '#667777' }}>
               <Icon type="shopping-cart" style={{ fontSize: 30, marginBottom: 4, marginTop: '10px' }} />
             </a>
           </Badge>
         </Menu.Item>
 
-        <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Logout</a>
-        </Menu.Item>
+
+
+
+        <SubMenu title={<span>
+          <a href="/profile">
+            <Avatar
+            
+              src={ProfilePicture === '' ?
+              `http://localhost:5000/uploads/profilePictures/1589640704206_Profile_avatar_placeholder_large.PNG`
+                :
+                `http://localhost:5000/${ProfilePicture}` 
+              }
+              alt="Han Solo"
+            />
+          </a>
+        </span>}>
+          <Menu.Item style={{ textAlign: 'center' }} key="logout">
+            <a onClick={logoutHandler}>logout</a>
+          </Menu.Item>
+
+
+        </SubMenu>
       </Menu>
     )
   }

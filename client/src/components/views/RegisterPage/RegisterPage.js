@@ -69,7 +69,7 @@ function RegisterPage(props) {
             password: values.password,
             name: values.name,
             lastName: values.lastName,
-            image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
+            image: ''
           };
 
           dispatch(registerUser(dataToSubmit)).then(response => {
@@ -153,7 +153,7 @@ function RegisterPage(props) {
               </Form.Item>
 
               <Form.Item required label="Password" hasFeedback validateStatus={errors.password && touched.password ? "error" : 'success'}>
-                <Input
+                <Input.Password
                   id="password"
                   placeholder="Enter your password"
                   type="password"
@@ -170,7 +170,7 @@ function RegisterPage(props) {
               </Form.Item>
 
               <Form.Item required label="Confirm" hasFeedback>
-                <Input
+                <Input.Password
                   id="confirmPassword"
                   placeholder="Enter your confirmPassword"
                   type="password"

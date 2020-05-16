@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
-import { Button, Descriptions } from 'antd'
+import { Button, Descriptions, message } from 'antd'
 
 function ProductInfo(props) {
 
@@ -14,6 +14,7 @@ function ProductInfo(props) {
     const addToCartHandler =() =>{
         //onclick, we want to send the details of the product to the parent component (singleProduct.js)
         props.addToCart(props.detail._id)
+        message.success("product added to cart")
     }
     return (
         <div>
@@ -26,7 +27,6 @@ function ProductInfo(props) {
             <br />
             <br />
             <br />
-
 
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>

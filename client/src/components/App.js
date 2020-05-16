@@ -11,6 +11,7 @@ import UploadProduct from "./views/uploadProduct/uploadProduct"
 import ProfilePage from './views/ProfilePage/profile'
 import SingleProduct from './views/singleProduct/singleProduct'
 import CartPage from './views/cartPage/cartPage'
+import ResetUser from './views/reset_user/resetUser'
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/profile" component={Auth(ProfilePage, true)} />
           <Route exact path="/product/:productId" component={Auth(SingleProduct, true)} />
           <Route exact path="/user/cart/" component={Auth(CartPage, true)} />
+          <Route exact path="/reset_user" component={Auth(ResetUser, false)} />
         </Switch>
       </div>
       <Footer />

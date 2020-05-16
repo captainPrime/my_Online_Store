@@ -30,12 +30,15 @@ router.post("/uploadImage", auth, (req, res, next) => {
     //after getting image from server
     //save to node server
     upload(req, res, err => {
-        if (err) /* return res.json({ success: false, err }) */ console.log(err)
+        if (err) return res.json({ success: false, err })  //console.log(err)
         return res.json({
             success: true,
             image: res.req.file.path,
             fileName: res.req.file.filename
         })
+        console.log(image)
+        console.log(res.req.file.filename)
+
     })
 });
 
@@ -63,7 +66,7 @@ router.post("/comment", auth, (req, res) => {
     const user = req.user.name
 
     Products.findOne({ _id: productId }, (err, ProductInfo) => {
-        console.log(ProductInfo)
+        //console.log(ProductInfo)
         if (myComment.length > 0) {
             Products.findOneAndUpdate(
                 { _id: productId },
@@ -99,7 +102,7 @@ router.post('/getProduct', (req, res) => {
     const findArg = {}
     let term = req.body.searchTerm
 
-    console.log(term)
+    //console.log(term)
     for (let key in req.body.filters) {
         //console.log(key) //continent and price
         if (req.body.filters[key].length > 0) {
@@ -122,7 +125,7 @@ router.post('/getProduct', (req, res) => {
         }
     }
 
-    console.log(findArg)
+    //console.log(findArg)
     //findArg = { categories: [1] } --dummy
     //findArg = { categories: [ 3 ], price: { '$gte': 0, '$lte': 199 } } --dummy
 
@@ -175,22 +178,37 @@ router.post('/getProduct', (req, res) => {
 //get single Product from databse
 //?id=${productId}&type=single
 router.get("/products_by_id", (req, res) => {
+    //query is gotten from the params in the user_action == (?id=${productId}&type=single)
     let type = req.query.type
     let productId = req.query.id
 
-    //console.log(productIds)
+    //console.log(productIds) 
+    //console.log(productId)
 
+    //this condition is to display all the cart on a cartpage
     if (type === 'array') {
+        //if id is more than 1, split with a comma
+        let ids = req.query.id.split(',')
+        productId = [];
+
+        productId = ids.map(item => {
+            return item
+        })
 
     }
+
+    //console.log(productId)
 
     //we need to find the product info belonging to product id
     Products.find({ '_id': { $in: productId } })
         .populate('writer')
         .exec((err, product) => {
+            //console.log(product)
             if (err) return res.status(400).send(err)
             return res.status(200).send(product)
+
         })
+
 });
 
 module.exports = router;

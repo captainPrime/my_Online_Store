@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Dropzone from 'react-dropzone'
 import { Icon } from 'antd'
-import axios from 'axios'
+import Axios from 'axios'
 import './styles/style.css';
 
 function FileUpload(props) {
@@ -19,16 +19,22 @@ function FileUpload(props) {
         formData.append("file", files[0])
 
         //save the image inside the node server
-        axios.post('/api/product/uploadImage', formData, config)
+        Axios.post('/api/product/uploadImage', formData, config)
             .then(response => {
                 if (response.data.success) {
                     setImages([...Images, response.data.image])
+
                     props.refreshFunction([...Images, response.data.image])
                 }
                 else {
                     alert('Failed to save Add Image')
                 }
+                console.log(response.data.image)
+
+                console.log("yeah")
+
             })
+
             .catch(err => console.log(err))
     }
     //----------------------------------------------------------
@@ -46,9 +52,10 @@ function FileUpload(props) {
         props.refreshFunction(newImages)
     }
 
+    console.log(Images)
     return (
-        <div style={{ display: "flex", justifyContent: 'space-between'}}>
-            <Dropzone style={{width: '100%'}} className="dropzone"
+        <div style={{ display: "flex", justifyContent: 'space-between' }}>
+            <Dropzone style={{ width: '100%' }} className="dropzone"
                 onDrop={onDrop}
                 multiple={false}
                 maxSize={800000000}

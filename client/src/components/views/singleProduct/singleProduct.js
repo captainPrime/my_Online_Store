@@ -7,6 +7,8 @@ import { addToCart } from '../../../_actions/user_actions'
 import { useDispatch } from 'react-redux'
 import CommentPage from './sections/comments'
 
+
+
 function SingleProduct(props) {
 
     const dispatch = useDispatch()

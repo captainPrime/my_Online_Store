@@ -40,11 +40,13 @@ function CommentPage(props) {
 
     const handleChange = (event) => {
         setMyComment(event.target.value)
+
     }
 
     const onSubmit = (event) => {
         event.preventDefault()
         props.addComment(myComment, props.detail._id)
+        setMyComment('')
     }
     return (
         <div style={{ justifyContent: 'center' }}>
@@ -60,9 +62,9 @@ function CommentPage(props) {
                 <Button onClick={onSubmit}>Comment</Button>
             </Form>
 
-                {Product ?
-                    Product.slice(0, valueShown).map((item) => (
-                        <div>
+            {Product ?
+                Product.slice(0, valueShown).map((item) => (
+                    <div>
                         <Comment
                             author={item.user}
                             avatar={
@@ -82,14 +84,21 @@ function CommentPage(props) {
                                 </Tooltip>
                             }
                         />
-                     <Button onClick={showMore}>Show All</Button>
-            
-                        </div>
-                        
-                    )) :
-                    <h2 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>No Comment on this product</h2>
-                }
-   
+
+
+                    </div>
+
+
+                )) :
+                <h2 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>No Comment on this product</h2>
+            }
+            {Product && Product.length > 5 ? <Button onClick={showMore}>Show All</Button> : <h1></h1>
+
+
+            }
+
+
+
         </div>
     )
 }

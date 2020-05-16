@@ -5,23 +5,18 @@ import PriceFilter from './Sections/price_filter'
 import ImageSlider from '../../utils/ImageSlider'
 import { price, categories } from './Sections/datas'
 import SearchComponent from './Sections/search_filter'
+import { ShoppingCartOutline, SettingOutline, EllipsisOutline, EditOutline } from '@ant-design/icons';
 import {
     Button,
     Icon,
     Row,
     Col,
-    Card,
-    Steps,
-    Typography
+    Card
 } from 'antd'
 
-import { LoadingOutline } from '@ant-design/icons'
-
 const { Meta } = Card
-const { Step } = Steps
-const { Text } = Typography
 
-function LandingPage() {
+function LandingPage(props) {
 
     const [Products, setProducts] = useState([])
     //setting the amount of product to show on the landing page
@@ -86,23 +81,29 @@ function LandingPage() {
     }
 
     //render the products 
+
+    const ActionArray = [
+        <SettingOutline key="setting" />,
+        <EditOutline key="edit" />,
+        <EllipsisOutline key="ellipsis" />,
+    ]
     const renderProduct = Products.map((product, index) => {
         return <Col lg={6} md={8} sm={12} xs={24}>
             <Card
                 loading={loading}
                 hoverable={true}
-                
+
                 //clicking the image would direct us to its singular form using its id
                 cover={<a href={`/product/${product._id}`}><ImageSlider images={product.images} /></a>}
 
+              /*   actions={ActionArray} */
             >
                 <Meta
                     title={product.title}
                     description={`$${product.price}`}
 
-                >
-
-                </Meta>
+                /> 
+                
             </Card>
         </Col>
     })
