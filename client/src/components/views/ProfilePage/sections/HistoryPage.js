@@ -12,7 +12,7 @@ function HistoryPage() {
                     setHistory(response.data.history)
                 }
                 else {
-                    message.error('Failed to get History')
+                    message.error('Failed to get Payment History')
                 }
             })
     })
