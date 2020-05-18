@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "node server/index.js",
     "backend": "nodemon server/index.js",
-    "frontend": "npm run start --prefix client",
-    "start": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
+    "start": "npm run start --prefix client",
+    "stert": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
     "heroku-postbuild": "npm run build"
   },
     "engines": {
