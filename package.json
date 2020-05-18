@@ -11,7 +11,8 @@
     "dev": "node server/index.js",
     "backend": "nodemon server/index.js",
     "frontend": "npm run start --prefix client",
-    "start": "concurrently \"npm run backend\" \"npm run start --prefix client\""
+    "start": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
   "author": "John ahn",
   "license": "ISC",
