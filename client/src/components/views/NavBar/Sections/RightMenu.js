@@ -106,9 +106,9 @@ function RightMenu(props) {
             <Avatar
             
               src={ProfilePicture === '' ?
-              `http://localhost:5000/uploads/profilePictures/1589640704206_Profile_avatar_placeholder_large.PNG`
+              `https://prime-online-store.herokuapp.com/uploads/profilePictures/1589640704206_Profile_avatar_placeholder_large.PNG`
                 :
-                `http://localhost:5000/${ProfilePicture}` 
+                `https://prime-online-store.herokuapp.com/${ProfilePicture}` 
               }
               alt="Han Solo"
             />
