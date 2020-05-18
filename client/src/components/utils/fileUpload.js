@@ -84,7 +84,7 @@ function FileUpload(props) {
                 {/* the images are stored in the IMAGES state ARRAY, so we map them to populate the page */}
                 {Images.map((image, index) => (
                     <div onClick={() => onDelete(image)}>
-                        <img style={{ minWidth: '300px', width: '300px', height: '220px' }} src={`http://localhost:5000/${image}`} alt={`product-img${index}`} />
+                        <img style={{ minWidth: '300px', width: '300px', height: '220px' }} src={`https://prime-online-store.herokuapp.com./${image}`} alt={`product-img${index}`} />
                     </div>
                 ))}
 
