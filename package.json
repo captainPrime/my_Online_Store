@@ -10,7 +10,7 @@
     "start": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
-    "engine": {
+    "engines": {
     "node": "10.16.0",
     "npm": "6.9.0"
   },
