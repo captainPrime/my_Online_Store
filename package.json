@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "description": "react boiler plate",
   "main": "index.js",
-  "engine": {
-    "node": "10.16.0",
-    "npm": "6.9.0"
-  },
   "scripts": {
     "dev": "node server/index.js",
     "backend": "nodemon server/index.js",
     "frontend": "npm run start --prefix client",
     "start": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
+  },
+    "engine": {
+    "node": "10.16.0",
+    "npm": "6.9.0"
   },
   "author": "John ahn",
   "license": "ISC",
