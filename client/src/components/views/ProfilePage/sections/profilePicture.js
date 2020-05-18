@@ -72,7 +72,7 @@ function FileUpload(props) {
                             <div>Upload Image</div>
                         </div>
                          :
-                            <img style={{ minWidth: '200px', width: '200px', height: '200px' }} src={`http://localhost:5000/${ProfilePicture}`} alt={`product-img`} />
+                            <img style={{ minWidth: '200px', width: '200px', height: '200px' }} src={`https://prime-online-store.herokuapp.com/${ProfilePicture}`} alt={`product-img`} />
                         }
 
 
