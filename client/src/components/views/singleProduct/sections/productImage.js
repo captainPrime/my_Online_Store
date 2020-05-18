@@ -14,8 +14,8 @@ function ProductImage(props) {
             /* props.detail.images &&  */props.detail.images.map(item => {
                 // this is from the (react-image-gallery) module
                 images.push({
-                    original: `http://localhost:5000/${item}`,
-                    thumbnail: `http://localhost:5000/${item}`
+                    original: `https://prime-online-store.herokuapp.com/${item}`,
+                    thumbnail: `https://prime-online-store.herokuapp.com/${item}`
                 })
             })
 
