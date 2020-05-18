@@ -21,7 +21,7 @@ function CartBlock(props) {
                         props.products && props.products.map(item => (
                             <tr key={item._id}>
                                 <td>
-                                    <img style={{ width: '70px' }} alt="product" src={`http://localhost:5000/${item.images[0]}`} />
+                                    <img style={{ width: '70px' }} alt="product" src={`https://prime-online-store.herokuapp.com/${item.images[0]}`} />
                                 </td>
                                 <td>
                                     <div>
